@@ -18,21 +18,22 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabContent() {
-    val tabs = listOf<Tabs_item>(
-        Tabs_item.Room_item,
-        Tabs_item.Device_item,
+fun Devices_TabContent() {
+    val tabs = listOf<DevicesTabs_item>(
+        DevicesTabs_item.Light,
+        DevicesTabs_item.Thermostat,
+        DevicesTabs_item.Fan
     )
     val pagerState = com.google.accompanist.pager.rememberPagerState()
     Column(modifier = Modifier.fillMaxSize()) {
-        Tabs(tabs, pagerState)
-        Tabs_content(tabs, pagerState)
+        DevicesTabs(tabs, pagerState)
+        DevicesTabs_content(tabs, pagerState)
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun Tabs_content(tabs: List<Tabs_item>, pagerState: com.google.accompanist.pager.PagerState) {
+fun DevicesTabs_content(tabs: List<DevicesTabs_item>, pagerState: com.google.accompanist.pager.PagerState) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
         tabs[page].screen()
     }
@@ -40,7 +41,7 @@ fun Tabs_content(tabs: List<Tabs_item>, pagerState: com.google.accompanist.pager
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun Tabs(tabs: List<Tabs_item>, pagerState: com.google.accompanist.pager.PagerState) {
+fun DevicesTabs(tabs: List<DevicesTabs_item>, pagerState: com.google.accompanist.pager.PagerState) {
     val scope = rememberCoroutineScope()
     TabRow(
         selectedTabIndex = pagerState.currentPage,
@@ -62,7 +63,7 @@ fun Tabs(tabs: List<Tabs_item>, pagerState: com.google.accompanist.pager.PagerSt
                 text = {
                     Text(text = tabsItem.title)
                 },
-                icon = { Icon(painterResource(id = tabsItem.icon), contentDescription = "") })
+                icon = { Icon(painter = painterResource(id =tabsItem.icon), contentDescription = "") })
         }
     }
 }
