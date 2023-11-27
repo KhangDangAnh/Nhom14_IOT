@@ -63,19 +63,13 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomScreen() {
-    var RoomName by remember {
-        mutableStateOf("Room")
-    }
-    var option by remember {
-        mutableStateOf(0)
-    }
+fun LivingRoomScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Red, titleContentColor = Color.White),
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
                 title = {
-                    Text(text = RoomName,fontWeight = FontWeight.Bold)
+                    Text(text = "LivingRoom",fontWeight = FontWeight.Bold)
                 },
                 navigationIcon = { IconButton(onClick = { }) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
@@ -85,190 +79,114 @@ fun RoomScreen() {
     ) {
         Column(modifier = Modifier
             .padding(it)
-            .fillMaxWidth()
-            .fillMaxHeight(),
+            .fillMaxSize(),
            ) {
-            Spacer(modifier = Modifier.padding(10.dp))
-            BongDen()
-            Spacer(modifier = Modifier.padding(10.dp))
-            CanhQuat()
+            LightCard(RoomName = "")
+            Spacer(modifier = Modifier.height(10.dp))
+            FanCard(RoomName = "")
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BongDen() {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .height(230.dp)
-        .background(color = Color.Gray)
-        .border(width = 2.dp, color = Color.Blue, shape = RoundedCornerShape(20.dp))) {
-        Row(horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(id = R.drawable.bongden),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(150.dp)
-                    .clip(CircleShape)
+fun BedRoom1Screen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
+                title = {
+                    Text(text = "BedRoom1",fontWeight = FontWeight.Bold)
+                },
+                navigationIcon = { IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }}
             )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center) {
-                RadioButton()
-                ProgressBar()
-            }
         }
-    }
-}
-
-@Composable
-fun CanhQuat() {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .background(color = Color.Gray)
-            .border(width = 2.dp, color = Color.Blue, shape = RoundedCornerShape(20.dp))
     ) {
-        Row(horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(id = R.drawable.canhquat),
-                contentDescription = null,
-                Modifier
-                    .size(150.dp)
-                    .clip(CircleShape)
+        Column(modifier = Modifier
+            .padding(it)
+            .fillMaxSize(),
+        ) {
+            LightCard(RoomName = "")
+            Spacer(modifier = Modifier.height(10.dp))
+            FanCard(RoomName = "")
+        }
+    }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BedRoom2Screen() {
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
+                title = {
+                    Text(text = "BedRoom2",fontWeight = FontWeight.Bold)
+                },
+                navigationIcon = { IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }}
             )
-            RadioButton()
+        }
+    ) {
+        Column(modifier = Modifier
+            .padding(it)
+            .fillMaxSize(),
+        ) {
+            LightCard(RoomName = "")
+            Spacer(modifier = Modifier.height(10.dp))
+            FanCard(RoomName = "")
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun KichenScreen() {
 
-@Composable
-fun RadioButton() {
-    val radioOptions = listOf("Bật", "Tắt")
-    var selectedOption by remember { mutableStateOf(radioOptions[0]) }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        radioOptions.forEach { option ->
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .selectable(
-                        selected = selectedOption == option,
-                        onClick = {
-                            selectedOption == option
-                        }
-                    )
-                    .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = selectedOption==option,
-                    onClick = {
-                        selectedOption==option
-                    }
-                )
-                Text(
-                    text = option,
-                    modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                )
-            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
+                title = {
+                    Text(text = "Kitchen",fontWeight = FontWeight.Bold)
+                },
+                navigationIcon = { IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }}
+            )
+        }
+    ) {
+        Column(modifier = Modifier
+            .padding(it)
+            .fillMaxSize(),
+        ) {
+            LightCard(RoomName = "")
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProgressBar() {
-    val context = LocalContext.current
-    var progressCount: Int by remember {
-        mutableStateOf(0)
-    }
-    var progress by remember {
-        mutableStateOf(0f)
-    }
-    when(progressCount){
-        0-> progress =0f
-        1-> progress =0.1f
-        2-> progress =0.2f
-        3-> progress =0.3f
-        4-> progress =0.4f
-        5-> progress =0.5f
-        6-> progress =0.6f
-        7-> progress =0.7f
-        8-> progress =0.8f
-        9-> progress =0.9f
-        10-> progress =1.0f
-    }
-    val size by animateFloatAsState(
-        targetValue = progress,
-        tween(
-            durationMillis = 1000,
-            delayMillis = 200,
-            easing = LinearOutSlowInEasing
-        )
-    )
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Tăng giảm độ sáng")
-        Spacer(modifier = Modifier.height(10.dp))
-        Row(modifier = Modifier
-            .widthIn(min = 30.dp)
-            .fillMaxWidth(size),
-            horizontalArrangement = Arrangement.Center) {
-            Text(text = "$progress")
+fun ToiletScreen() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
+                title = {
+                    Text(text = "Toilet",fontWeight = FontWeight.Bold)
+                },
+                navigationIcon = { IconButton(onClick = { }) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }}
+            )
         }
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(17.dp)) {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(9.dp))
-                .background(color = Color.Cyan))
-            Box(modifier = Modifier
-                .fillMaxWidth(size)
-                .fillMaxHeight()
-                .clip(RoundedCornerShape(9.dp))
-                .background(color = Color.White)
-                .animateContentSize())
-        }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically){
-            Button(
-                onClick = { if(progressCount>0){
-                    progressCount-=2
-                }else{
-                    Toast.makeText(context,"Ban khong the giam them",Toast.LENGTH_SHORT).show()
-                }
-                }
-            ) {
-                Text(text = "Giam")
-            }
-            Button(
-                onClick = {
-                    if(progressCount<10){
-                        progressCount+=2;
-                }else{
-                    Toast.makeText(context,"Ban khong the tang them",Toast.LENGTH_SHORT).show()
-                    }
-                }
-            ) {
-                Text(text = "Tang")
-            }
+    ) {
+        Column(modifier = Modifier
+            .padding(it)
+            .fillMaxSize(),
+        ) {
+            LightCard(RoomName = "")
         }
     }
-//    LaunchedEffect(key1 = true){
-//        progress=0.7f
-//    }
-}
-
-@Preview
-@Composable
-fun SSS() {
-    RoomScreen()
 }
