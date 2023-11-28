@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.iot_application.Profile.ChangePassword
-import com.example.iot_application.Profile.changeProfile
-import com.example.iot_application.Profile.screenFrofile
 import com.example.iot_application.ui.theme.IOT_applicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +20,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                  ChangePassword()
                 }
 //                NewPickerTheme
             }
