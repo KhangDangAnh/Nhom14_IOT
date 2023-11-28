@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RoomScreen()
+                    RoomScreen(isFan = true, isLightbyButton = true, isLightBySlider = true)
                 }
             }
         }

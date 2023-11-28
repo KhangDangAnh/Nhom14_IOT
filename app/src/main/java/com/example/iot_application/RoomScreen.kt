@@ -63,16 +63,16 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LivingRoomScreen() {
+fun RoomScreen(isFan:Boolean,isLightBySlider:Boolean,isLightbyButton:Boolean) {
     Scaffold(
         topBar = {
             TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
+                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color(12, 27, 50), titleContentColor = Color.White),
                 title = {
-                    Text(text = "LivingRoom",fontWeight = FontWeight.Bold)
+                    Text(text = "Room",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
                 },
-                navigationIcon = { IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                navigationIcon = { IconButton(onClick = { },Modifier.size(20.dp)) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
                 }}
             )
         }
@@ -81,112 +81,15 @@ fun LivingRoomScreen() {
             .padding(it)
             .fillMaxSize(),
            ) {
-            LightCard(RoomName = "")
-            Spacer(modifier = Modifier.height(10.dp))
-            FanCard(RoomName = "")
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BedRoom1Screen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
-                title = {
-                    Text(text = "BedRoom1",fontWeight = FontWeight.Bold)
-                },
-                navigationIcon = { IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                }}
-            )
-        }
-    ) {
-        Column(modifier = Modifier
-            .padding(it)
-            .fillMaxSize(),
-        ) {
-            LightCard(RoomName = "")
-            Spacer(modifier = Modifier.height(10.dp))
-            FanCard(RoomName = "")
-        }
-    }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BedRoom2Screen() {
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
-                title = {
-                    Text(text = "BedRoom2",fontWeight = FontWeight.Bold)
-                },
-                navigationIcon = { IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                }}
-            )
-        }
-    ) {
-        Column(modifier = Modifier
-            .padding(it)
-            .fillMaxSize(),
-        ) {
-            LightCard(RoomName = "")
-            Spacer(modifier = Modifier.height(10.dp))
-            FanCard(RoomName = "")
-        }
-    }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun KichenScreen() {
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
-                title = {
-                    Text(text = "Kitchen",fontWeight = FontWeight.Bold)
-                },
-                navigationIcon = { IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                }}
-            )
-        }
-    ) {
-        Column(modifier = Modifier
-            .padding(it)
-            .fillMaxSize(),
-        ) {
-            LightCard(RoomName = "")
-        }
-    }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ToiletScreen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color.Cyan, titleContentColor = Color.White),
-                title = {
-                    Text(text = "Toilet",fontWeight = FontWeight.Bold)
-                },
-                navigationIcon = { IconButton(onClick = { }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                }}
-            )
-        }
-    ) {
-        Column(modifier = Modifier
-            .padding(it)
-            .fillMaxSize(),
-        ) {
-            LightCard(RoomName = "")
+            if(isFan==true){
+                FanCard()
+            }
+            if(isLightbyButton==true){
+                LightCardByButton()
+            }
+            if(isLightBySlider==true){
+                LightCardBySliderPosition()
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -14,7 +16,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,14 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LightCard(RoomName:String) {
-    var checked by remember {
-        mutableStateOf(false)
-    }
+fun LightCardBySliderPosition() {
     var sliderPosition by remember {
-        mutableFloatStateOf(0f)
+        mutableStateOf(0f)
     }
-    Card(modifier = Modifier.height(150.dp)) {
+    Card(modifier = Modifier
+        .height(150.dp)
+        .padding(top = 5.dp, bottom = 5.dp)) {
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally)
@@ -44,8 +44,44 @@ fun LightCard(RoomName:String) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
+                if(sliderPosition>0.1){
+                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
+                }else{
+                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
+                }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text(RoomName)
+                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(start = 5.dp)) {
+                    Text(text = sliderPosition.toString())
+                    Slider(value = sliderPosition, onValueChange ={sliderPosition=it})
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun LightCardByButton() {
+    var checked by remember {
+        mutableStateOf(false)
+    }
+    Card(modifier = Modifier
+        .height(150.dp)
+        .padding(top = 5.dp, bottom = 5.dp)) {
+        Column(modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally)
+        {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                if(checked){
+                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
+                }else{
+                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
+                }
+                Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
                     checked = checked,
                     onCheckedChange = {checked=it},
@@ -62,9 +98,6 @@ fun LightCard(RoomName:String) {
                         }
                     })
             }
-            Divider(color = Color.DarkGray)
-            Text(text = sliderPosition.toString())
-            Slider(value = sliderPosition, onValueChange = {sliderPosition=it})
         }
     }
 }
