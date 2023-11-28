@@ -1,6 +1,5 @@
-package com.example.iot_application.VuHung
+package com.example.iot_application.Login
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,14 +36,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.iot_application.Screens
 import com.example.iot_application.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(
-    //navController: NavController,
-
+fun LoginScreen(navController: NavHostController,
 ) {
     Scaffold {
         Column(
@@ -117,7 +116,7 @@ fun LoginScreen(
                             shape = RoundedCornerShape(25),
                             modifier = Modifier.size(width = 150.dp, height = 40.dp),
                             onClick = {
-
+                            navController.navigate(Screens.Home.route)
                             }) {
                             Text("Đăng Nhập")
                         }

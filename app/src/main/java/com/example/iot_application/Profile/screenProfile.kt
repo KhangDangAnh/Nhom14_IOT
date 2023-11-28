@@ -1,19 +1,19 @@
 package com.example.iot_application.Profile
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AccountBox
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -21,223 +21,302 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.iot_application.R
+import com.example.iot_application.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun screenFrofile(name: String) {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(top = 10.dp, start = 5.dp, end = 5.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+fun Profile_Screen(name: String,navController: NavHostController) {
+    Scaffold(bottomBar = {
+        BottomAppBar(
+            Modifier.clip(
+                RoundedCornerShape(20.dp),
             ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
+            containerColor = Color.LightGray
         ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
             ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Tên",
-                        textAlign = TextAlign.Start
+                IconButton(onClick = { navController.navigate(Screens.Home.route) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_home_24),
+                        contentDescription = "",
+                        tint = Color.DarkGray
                     )
-                    Row {
-                        Text(
-                            text = name,
-                            textAlign = TextAlign.Start
-                        )
-                        Icon(
-                            imageVector = Icons.Rounded.KeyboardArrowRight,
-                            contentDescription = null
-                        )
-                    }
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_doorbell_24),
+                        contentDescription = "",
+                        tint = Color.DarkGray
+                    )
+                }
+                IconButton(onClick = { navController.navigate(Screens.Chart.route) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
+                        contentDescription = "",
+                        tint = Color.DarkGray
+                    )
+                }
+                IconButton(onClick = { navController.navigate(Screens.Profile.route) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_account_circle_24),
+                        contentDescription = "",
+                        tint = Color.DarkGray
+                    )
                 }
             }
         }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-        ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+    },
+        topBar = {
+            TopAppBar(
+                title = {
                     Text(
-                        text = "Ngày sinh",
-                        textAlign = TextAlign.Start
+                        text = "Profile",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold
                     )
-                    Row {
-                        Text(
-                            text = name,
-                            textAlign = TextAlign.Start
-                        )
-                        Icon(
-                            imageVector = Icons.Rounded.KeyboardArrowRight,
-                            contentDescription = null
-                        )
-                    }
-                }
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = Color(12, 27, 50),
+                    titleContentColor = Color.White
 
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-        ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Giới tính",
-                        textAlign = TextAlign.Start
-                    )
-                    Row {
-                        Text(
-                            text = name,
-                            textAlign = TextAlign.Start
-                        )
+                ),
+                navigationIcon = {
+                    androidx.compose.material3.IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
-                            imageVector = Icons.Rounded.KeyboardArrowRight,
-                            contentDescription = null
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = null,
+                            tint = Color.White
                         )
+
                     }
                 }
-
-            }
+            )
         }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-        ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Số điện thoại",
-                        textAlign = TextAlign.Start
-                    )
-                    Row {
-                        Text(
-                            text = name,
-                            textAlign = TextAlign.Start
-                        )
-                        Icon(
-                            imageVector = Icons.Rounded.KeyboardArrowRight,
-                            contentDescription = null
-                        )
-                    }
-                }
-
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-        ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(5.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Email",
-                        textAlign = TextAlign.Start
-                    )
-                    Row {
-                        Text(
-                            text = name,
-                            textAlign = TextAlign.Start
-                        )
-                        Icon(
-                            imageVector = Icons.Rounded.KeyboardArrowRight,
-                            contentDescription = null
-                        )
-                    }
-                }
-
-            }
-        }
-        Row (
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 30.dp, end = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
         ){
-            Button(
-                onClick = {},
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(it),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
             ) {
-                Text(text = "Đăng xuất")
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Tên",
+                            textAlign = TextAlign.Start
+                        )
+                        Row {
+                            Text(
+                                text = name,
+                                textAlign = TextAlign.Start
+                            )
+                            Icon(
+                                imageVector = Icons.Rounded.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                }
             }
-            Button(
-                onClick = {},
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
             ) {
-                Text(text = "Đổi mật khẩu")
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Ngày sinh",
+                            textAlign = TextAlign.Start
+                        )
+                        Row {
+                            Text(
+                                text = name,
+                                textAlign = TextAlign.Start
+                            )
+                            Icon(
+                                imageVector = Icons.Rounded.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
+                    }
+
+                }
+            }
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+            ) {
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Giới tính",
+                            textAlign = TextAlign.Start
+                        )
+                        Row {
+                            Text(
+                                text = name,
+                                textAlign = TextAlign.Start
+                            )
+                            Icon(
+                                imageVector = Icons.Rounded.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
+                    }
+
+                }
+            }
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+            ) {
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Số điện thoại",
+                            textAlign = TextAlign.Start
+                        )
+                        Row {
+                            Text(
+                                text = name,
+                                textAlign = TextAlign.Start
+                            )
+                            Icon(
+                                imageVector = Icons.Rounded.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
+                    }
+
+                }
+            }
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+            ) {
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Email",
+                            textAlign = TextAlign.Start
+                        )
+                        Row {
+                            Text(
+                                text = name,
+                                textAlign = TextAlign.Start
+                            )
+                            Icon(
+                                imageVector = Icons.Rounded.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
+                    }
+
+                }
+            }
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 30.dp, end = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(
+                    onClick = {},
+                ) {
+                    Text(text = "Đăng xuất")
+                }
+                Button(
+                    onClick = {},
+                ) {
+                    Text(text = "Đổi mật khẩu")
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,18 +28,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.iot_application.R
+import com.example.iot_application.Screens
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChartScreen(
     data: Map<Float, String>,
-    max_value: Int
+    max_value: Int,
+    navController: NavHostController
 ) {
     val context = LocalContext.current
     // BarGraph Dimensions
@@ -48,6 +54,49 @@ fun ChartScreen(
     val scaleYAxisWidth by remember { mutableStateOf(50.dp) }
     val scaleLineWidth by remember { mutableStateOf(2.dp) }
     Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                Modifier.clip(
+                    RoundedCornerShape(20.dp),
+                ),
+                containerColor = Color.LightGray
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    androidx.compose.material.IconButton(onClick = { navController.navigate(Screens.Home.route) }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_home_24),
+                            contentDescription = "",
+                            tint = Color.DarkGray
+                        )
+                    }
+                    androidx.compose.material.IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_doorbell_24),
+                            contentDescription = "",
+                            tint = Color.DarkGray
+                        )
+                    }
+                    androidx.compose.material.IconButton(onClick = { navController.navigate(Screens.Chart.route) }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_bar_chart_24),
+                            contentDescription = "",
+                            tint = Color.DarkGray
+                        )
+                    }
+                    androidx.compose.material.IconButton(onClick = { navController.navigate(Screens.Profile.route) }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_account_circle_24),
+                            contentDescription = "",
+                            tint = Color.DarkGray
+                        )
+                    }
+                }
+            }
+        },
         topBar = {
             TopAppBar(
                 title = {
@@ -64,7 +113,7 @@ fun ChartScreen(
 
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -73,13 +122,13 @@ fun ChartScreen(
 
                     }
                 }
-
             )
         }
     ) {
         Column(
             modifier = Modifier
-                .padding(it).padding(10.dp)
+                .padding(it)
+                .padding(10.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -92,9 +141,9 @@ fun ChartScreen(
                 fontWeight = FontWeight.Bold,
                 fontSize = 25.sp
             )
-            Card (
-                modifier=Modifier.background(Color(230, 230, 230))
-            ){
+            Card(
+                modifier = Modifier.background(Color(230, 230, 230))
+            ) {
                 Column(
                     modifier = Modifier
                         .padding(10.dp),
@@ -163,8 +212,8 @@ fun ChartScreen(
                                     .padding(start = barGraphWidth, bottom = 5.dp)
 
                                     .width(barGraphWidth)
-                                    .fillMaxHeight(it/100)
-                                    .background(Color(3, 122, 252 ))
+                                    .fillMaxHeight(it / 100)
+                                    .background(Color(3, 122, 252))
                                     .clickable {
                                         Toast
                                             .makeText(context, it.toString(), Toast.LENGTH_SHORT)
@@ -238,15 +287,17 @@ fun ChartScreen(
 
 
                     data.keys.forEach {
-                        Row( modifier = Modifier
+                        Row(
+                            modifier = Modifier
 
-                            .fillMaxWidth(),
+                                .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceEvenly) {
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
                             val theme by remember {
                                 mutableStateOf(
                                     if (it <= 15)
-                                        Color(3, 122, 252 )
+                                        Color(3, 122, 252)
                                     else if (it <= 35)
                                         Color(5, 225, 119)
                                     else
@@ -257,7 +308,7 @@ fun ChartScreen(
                             if (day < 8) {
                                 Text(
                                     text = "Nhiệt độ thứ ${day}: ${it} °C",
-                                    fontSize =20.sp
+                                    fontSize = 20.sp
                                 )
                                 Box(
                                     modifier = Modifier
@@ -298,15 +349,16 @@ fun ChartScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp).background(Color(230, 230, 230))
+                    .height(90.dp)
+                    .background(Color(230, 230, 230))
             ) {
-                var avtemp=0f;
-                var step=0;
+                var avtemp = 0f;
+                var step = 0;
                 data.keys.forEach {
                     step++
-                    avtemp+=it
+                    avtemp += it
                 }
-                var result=String.format("%.2f",avtemp/step)
+                var result = String.format("%.2f", avtemp / step)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -314,33 +366,21 @@ fun ChartScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text(text = "Nhiệt độ trung bình:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                    Text(text ="${result} °C", fontSize = 40.sp, fontWeight = FontWeight.Bold, color = Color(241, 51, 39))
+                    Text(
+                        text = "Nhiệt độ trung bình:",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "${result} °C",
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(241, 51, 39)
+                    )
                 }
             }
         }
 
 
     }
-
-
-}
-@Preview
-@Composable
-fun GreetingPreview() {
-    ChartScreen(
-        data = mapOf(
-
-            Pair(2f,"2"),
-            Pair(20f,"3"),
-            Pair(21f,"4"),
-            Pair(40f,"5"),
-            Pair(52f,"6"),
-            Pair(22f,"7"),
-            Pair(62f,"CN"),
-
-
-
-            ), max_value = 60
-    )
 }

@@ -1,6 +1,5 @@
-package com.example.iot_application.VuHung
+package com.example.iot_application.Login
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,15 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Phone
-import androidx.compose.material.icons.sharp.Done
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,9 +38,8 @@ import com.example.iot_application.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterScreen(
-    // navController: NavController,
-
+fun ForgotPasswordScreen(
+    // navController: NavHostController
 ) {
     Scaffold {
         Column(
@@ -50,6 +47,8 @@ fun RegisterScreen(
                 .padding(it)
                 .background(color = Color.White)
                 .fillMaxSize(),
+
+
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -57,7 +56,7 @@ fun RegisterScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .paint(
-                        // Thay đổi BackGround (Nếu cần)
+                        // Thay đổi BackGround(Nếu cần)
                         painterResource(id = R.drawable.background),
                         contentScale = ContentScale.FillBounds
                     )
@@ -68,18 +67,23 @@ fun RegisterScreen(
                     verticalArrangement = Arrangement.Center
 
                 ) {
-
                     Row(
                         Modifier.fillMaxWidth()
                     ) {
                         Text(
-                            text = "Đăng kí tài khoản",
+                            text = "Quên mật khẩu ư ?",
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.ExtraBold,
                             modifier = Modifier.fillMaxWidth(),
+                            color = Color.Black,
                             fontSize = 25.sp
                         )
                     }
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Text(text = "Đừng lo lắng, hãy nhập địa chỉ email", color = Color.Gray)
+                    Text(text = "và chúng tôi sẽ giúp bạn lấy lại tài khoản", color = Color.Gray)
+                    Spacer(modifier = Modifier.padding(5.dp))
+
                     OutlinedTextField(
                         value = "",
                         onValueChange = {},
@@ -88,51 +92,38 @@ fun RegisterScreen(
                         },
                         shape = CircleShape,
                         leadingIcon = {
-                            Image(imageVector = Icons.Rounded.Email, contentDescription = null)
+                            Icon(imageVector = Icons.Rounded.Person, contentDescription = null)
                         }
                     )
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        label = {
-                            Text(text = "Phone", textAlign = TextAlign.Center)
-                        },
-                        shape = CircleShape,
-                        leadingIcon = {
-                            Image(imageVector = Icons.Rounded.Phone, contentDescription = null)
-                        }
-                    )
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        label = {
-                            Text(text = "FullName", textAlign = TextAlign.Center)
-                        },
-                        shape = CircleShape,
-                        leadingIcon = {
-                            Image(imageVector = Icons.Rounded.Person, contentDescription = null)
-                        }
-                    )
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        label = {
-                            Text(text = "Password", textAlign = TextAlign.Center)
-                        },
-                        shape = CircleShape,
-                        leadingIcon = {
-                            Image(imageVector = Icons.Sharp.Done, contentDescription = null)
-                        }
-                    )
+
                     Spacer(modifier = Modifier.padding(5.dp))
-                    Button(
-                        shape = RoundedCornerShape(25),
-                        modifier = Modifier.size(width = 150.dp, height = 40.dp),
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceAround
 
-                        onClick = {
+                    ) {
+                        Button(
+                            shape = RoundedCornerShape(25),
+                            modifier = Modifier.size(width = 150.dp, height = 40.dp),
+                            onClick = {
 
-                        }) {
-                        Text("Đăng kí")
+                            }) {
+                            Text("Tìm kiếm")
+                        }
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        TextButton(
+                            onClick = {
+
+                                //Screen Đăng nhập
+
+                            }) {
+                            Text("Quay lại đăng nhập", color = Color.Blue)
+                        }
                     }
                 }
             }
