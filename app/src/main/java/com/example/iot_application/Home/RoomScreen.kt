@@ -20,30 +20,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.iot_application.R
+import com.example.iot_application.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomList() {
+fun RoomList(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     )
     {
         item {
-            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24)
+            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24)
+            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24)
+            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24)
+            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24)
+            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
         }
         item {
             Card(

@@ -5,7 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.chartiot.ChartScreen
+import com.example.iot_application.Home.DeviceScreen
 import com.example.iot_application.Home.HomeScreen
+import com.example.iot_application.Home.RoomList
 import com.example.iot_application.Login.LoginScreen
 import com.example.iot_application.Profile.Profile_Screen
 import com.example.iot_application.Room.RoomScreen
@@ -16,6 +18,9 @@ sealed class Screens(val route: String) {
     object Profile : Screens("Profile_Screen")
     object Room : Screens("Room_Screen")
     object Chart : Screens("Chart_Screen")
+
+    object Room_list : Screens("RoomList_Screen")
+    object Devices : Screens("Devices_Screen")
 }
 
 @Composable
@@ -37,6 +42,14 @@ fun NavGraph(navController: NavHostController) {
         composable(Screens.Room.route)
         {
             RoomScreen(navController)
+        }
+        composable(Screens.Room_list.route)
+        {
+            RoomList(navController)
+        }
+        composable(Screens.Devices.route)
+        {
+            DeviceScreen(navController)
         }
         composable(Screens.Chart.route)
         {

@@ -10,7 +10,7 @@ import com.example.iot_application.R
 typealias MyTabsFunction = @Composable () -> Unit
 sealed class DevicesTabs_item(
     var title : String,
-    var screen : MyFunction,
+    var screen : MyTabsFunction,
     var icon : Int
 ){
     object Light :DevicesTabs_item("Light",{ LightScreen()}, R.drawable.baseline_lightbulb_24)
