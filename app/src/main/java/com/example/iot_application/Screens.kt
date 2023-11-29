@@ -4,11 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.chartiot.ChartScreen
 import com.example.iot_application.Home.HomeScreen
+import com.example.iot_application.Home.RoomList
 import com.example.iot_application.Login.LoginScreen
 import com.example.iot_application.Profile.Profile_Screen
-import com.example.iot_application.Room.RoomScreen
+import com.example.iot_application.Room.BedRoom1
+import com.example.iot_application.Room.BedRoom2
+import com.example.iot_application.Room.KitChenRoom
+import com.example.iot_application.Room.LivingRoom
+import com.example.iot_application.Room.Toilet
 
 sealed class Screens(val route: String) {
     object Login : Screens("Login_Screen")
@@ -16,6 +20,11 @@ sealed class Screens(val route: String) {
     object Profile : Screens("Profile_Screen")
     object Room : Screens("Room_Screen")
     object Chart : Screens("Chart_Screen")
+    object LIVINGROOM: Screens("livingroom")
+    object KITCHENROOM: Screens("kitchenroom")
+    object BEDROOM1: Screens("bedroom1")
+    object BEDROOM2: Screens("bedroom2")
+    object TOILET: Screens("toilet")
 }
 
 @Composable
@@ -36,7 +45,7 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(Screens.Room.route)
         {
-            RoomScreen(navController)
+            RoomList()
         }
         composable(Screens.Chart.route)
         {
@@ -54,6 +63,21 @@ fun NavGraph(navController: NavHostController) {
 
                     ), max_value = 60, navController
             )
+        }
+        composable(Screens.LIVINGROOM.route){
+            LivingRoom(navController)
+        }
+        composable(Screens.BEDROOM1.route){
+            BedRoom1(navController)
+        }
+        composable(Screens.BEDROOM2.route){
+            BedRoom2(navController)
+        }
+        composable(Screens.KITCHENROOM.route){
+            KitChenRoom(navController)
+        }
+        composable(Screens.TOILET.route){
+            Toilet(navController)
         }
     }
 }

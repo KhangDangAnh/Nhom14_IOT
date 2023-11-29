@@ -1,6 +1,8 @@
 package com.example.iot_application.Home
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.iot_application.R
 
 typealias MyFunction = @Composable () -> Unit
