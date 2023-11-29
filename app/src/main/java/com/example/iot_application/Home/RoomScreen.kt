@@ -50,13 +50,11 @@ fun RoomList(navController: NavHostController) {
             RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            Card(
+            androidx.compose.material3.Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(80.dp),
-                contentColor = Color.Transparent,
-                backgroundColor = Color.Transparent,
-                border = BorderStroke(0.dp, Color.Transparent)
+                border = BorderStroke(1.dp, Color.LightGray),
             ) {
                 Row(
                     Modifier.fillMaxWidth(),

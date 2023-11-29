@@ -31,6 +31,18 @@ fun LightScreen() {
             item{
                 LightCard(RoomName = "Living Room")
             }
+            item{
+                LightCard(RoomName = "Bed Room 1")
+            }
+            item{
+                LightCard(RoomName = "Bed Room 2")
+            }
+            item{
+                LightCard(RoomName = "Kitchen")
+            }
+            item{
+                LightCard(RoomName = "Bath Room")
+            }
         }
     }
 }
