@@ -24,11 +24,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.iot_application.Screens
 import com.example.iot_application.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -42,7 +43,7 @@ fun HomeScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(Screens.Home.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_home_24),
                             contentDescription = "",
@@ -56,14 +57,14 @@ fun HomeScreen() {
                             tint = Color.DarkGray
                         )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(Screens.Chart.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_bar_chart_24),
                             contentDescription = "",
                             tint = Color.DarkGray
                         )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(Screens.Profile.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_account_circle_24),
                             contentDescription = "",
