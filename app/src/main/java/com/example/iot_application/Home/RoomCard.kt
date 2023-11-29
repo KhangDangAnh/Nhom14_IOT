@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomCard(room_name: String, icon: Int) {
+fun RoomCard(room_name: String, icon: Int,onClick:()->Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

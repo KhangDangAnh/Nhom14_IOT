@@ -1,8 +1,8 @@
-package com.example.iot_application
+package com.example.iot_application.Room
 
 
 import android.os.Build.VERSION.SDK_INT
-import android.util.Size
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,15 +36,18 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
+import com.example.iot_application.R
 
 @Composable
-fun FanCard() {
+fun NewFanCard() {
     var checked by remember {
         mutableStateOf(false)
     }
     Card(modifier = Modifier
-        .height(150.dp)
-        .padding(top = 5.dp, bottom = 5.dp)) {
+        .height(120.dp)
+        .padding(10.dp),
+        border = BorderStroke(1.dp,Color.Gray)
+    ) {
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally)
@@ -60,7 +61,7 @@ fun FanCard() {
                     GifImage()
                 }else{
                     Icon(painter = painterResource(id = R.drawable.fanvip1), contentDescription = "", Modifier.clip(
-                        CircleShape).size(120.dp))
+                        CircleShape).size(100.dp))
                 }
                 Text(text = "Fan", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.IconButton
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -33,19 +34,19 @@ fun RoomScreen() {
     )
     {
         item {
-            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24)
+            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24, onClick = {})
         }
         item {
-            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24)
+            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24, onClick = {})
         }
         item {
-            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24)
+            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24, onClick = {})
         }
         item {
-            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24)
+            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24, onClick = {})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24)
+            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24, onClick = {})
         }
         item {
             Card(
