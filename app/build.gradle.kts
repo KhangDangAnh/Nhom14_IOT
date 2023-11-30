@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.iot_application"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    implementation ("io.coil-kt:coil-compose:2.1.0")
+    implementation ("io.coil-kt:coil-gif:2.1.0")
     implementation("androidx.navigation:navigation-compose:2.7.5")
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -74,4 +76,12 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    implementation("com.google.accompanist:accompanist-pager:0.23.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.23.0")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+
+    implementation ("androidx.compose.runtime:runtime:1.5.4")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation ("androidx.compose.runtime:runtime-rxjava2:1.5.4")
 }
