@@ -9,7 +9,9 @@ import com.example.iot_application.Home.DeviceScreen
 import com.example.iot_application.Home.HomeScreen
 import com.example.iot_application.Home.RoomList
 import com.example.iot_application.Login.LoginScreen
+import com.example.iot_application.Profile.ChangePassword
 import com.example.iot_application.Profile.Profile_Screen
+import com.example.iot_application.Profile.changeProfile
 import com.example.iot_application.Room.RoomScreen
 
 sealed class Screens(val route: String) {
@@ -21,6 +23,10 @@ sealed class Screens(val route: String) {
 
     object Room_list : Screens("RoomList_Screen")
     object Devices : Screens("Devices_Screen")
+
+    object ChangProfile : Screens("Change_Profile")
+
+    object ChangePassword : Screens("Change_Pass")
 }
 
 @Composable
@@ -50,6 +56,16 @@ fun NavGraph(navController: NavHostController) {
         composable(Screens.Devices.route)
         {
             DeviceScreen(navController)
+        }
+
+        composable(Screens.ChangePassword.route)
+        {
+            ChangePassword(navController)
+        }
+
+        composable(Screens.ChangProfile.route)
+        {
+            changeProfile(navController)
         }
         composable(Screens.Chart.route)
         {

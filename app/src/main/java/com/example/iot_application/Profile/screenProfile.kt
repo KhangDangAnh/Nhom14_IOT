@@ -308,12 +308,12 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {navController.navigate(Screens.Login.route)},
                 ) {
                     Text(text = "Đăng xuất")
                 }
                 Button(
-                    onClick = {},
+                    onClick = {navController.navigate(Screens.ChangePassword.route)},
                 ) {
                     Text(text = "Đổi mật khẩu")
                 }

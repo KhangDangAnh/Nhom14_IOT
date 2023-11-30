@@ -19,10 +19,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun changeProfile(){
+fun changeProfile(navController: NavHostController){
     var change_hoTen by remember { mutableStateOf(" ") }
     var change_ngaySinh by remember {mutableStateOf(" ")}
     var change_gioiTinh by remember {mutableStateOf(" ")}
