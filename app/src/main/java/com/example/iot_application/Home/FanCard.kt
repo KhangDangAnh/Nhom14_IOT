@@ -68,12 +68,6 @@ fun FanCard(RoomName: String) {
                     }
                 )
             }
-            Divider(color = Color.DarkGray)
-            Slider(
-                value = sliderPosition,
-                onValueChange = { sliderPosition = it }
-            )
-            Text(text = sliderPosition.toString())
         }
     }
 }

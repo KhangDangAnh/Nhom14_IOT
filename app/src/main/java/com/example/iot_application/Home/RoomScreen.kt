@@ -22,40 +22,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.iot_application.R
 import com.example.iot_application.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomList() {
+fun RoomList(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     )
     {
         item {
-            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24, onClick = {})
+            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24, onClick = {})
+            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24, onClick = {})
+            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24, onClick = {})
+            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24, onClick = {})
+            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            Card(
+            androidx.compose.material3.Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(80.dp),
-                contentColor = Color.Transparent,
-                backgroundColor = Color.Transparent,
-                border = BorderStroke(0.dp, Color.Transparent)
+                border = BorderStroke(1.dp, Color.LightGray),
             ) {
                 Row(
                     Modifier.fillMaxWidth(),
