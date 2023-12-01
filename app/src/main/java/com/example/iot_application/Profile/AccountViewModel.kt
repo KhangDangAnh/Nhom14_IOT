@@ -3,34 +3,34 @@ package com.example.iot_application.Profile
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 
-class AccountViewModel {
+class AccountViewModel : ViewModel(){
     var state by mutableStateOf(User())
         private set
-
-
-    fun onChangeHoTen(newHoTen: String) {
-        state = state.copy(hoTen = newHoTen)
+    fun onChangeHoTen(newvalue: String) {
+        state = state.copy(hoTen = newvalue)
     }
-    fun onChangeNgaySinh(newNgaySinh: String) {
-        state = state.copy(ngaySinh = newNgaySinh)
+    fun onChangeNgaySinh(newvalue: String) {
+        state = state.copy(ngaySinh = newvalue)
     }
-    fun onChangeGioiTinh(newGioiTinh: String) {
-        state = state.copy(gioiTinh = newGioiTinh)
+    fun onChangeGioiTinh(newvalue: String) {
+        state = state.copy(gioiTinh = newvalue)
     }
-    fun onChangeSDT(newSDT: String) {
-        state = state.copy(sdt = newSDT)
+    fun onChangeSDT(newvalue: String) {
+        state = state.copy(sdt = newvalue)
     }
-    fun onChangeEmail(newEmail: String) {
-        state = state.copy(email = newEmail)
+    fun onChangeEmail(newvalue: String) {
+        state = state.copy(email = newvalue)
     }
 }
 
 data class User(
-    var image: String = "",
-    var hoTen: String = "",
-    var ngaySinh: String = "",
-    var gioiTinh: String = "",
-    var sdt: String = "",
-    var email: String = ""
+    val hoTen: String = "",
+    val ngaySinh: String = "",
+    val gioiTinh: String = "",
+    val sdt: String = "",
+    val email: String = "",
+    val success: Boolean = false,
 )

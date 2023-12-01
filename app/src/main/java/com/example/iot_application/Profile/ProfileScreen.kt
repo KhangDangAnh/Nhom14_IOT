@@ -38,7 +38,7 @@ import com.example.iot_application.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile_Screen(name: String,navController: NavHostController) {
+fun Profile_Screen(navController: NavHostController) {
     Scaffold(bottomBar = {
         BottomAppBar(
             Modifier.clip(
@@ -142,7 +142,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = "name",
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -178,7 +178,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = "name",
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -215,7 +215,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = "name",
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -252,7 +252,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = "name",
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -289,7 +289,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = "name",
                                 textAlign = TextAlign.Start
                             )
                             Icon(
