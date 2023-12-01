@@ -26,13 +26,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.iot_application.R
 
 @Composable
 fun NewLightCardBySliderPosition() {
-    var sliderPosition by remember {
+    var valueSlider by remember {
         mutableStateOf(0f)
     }
+    var viewModel:RoomViewModel = viewModel(
+        modelClass = RoomViewModel::class.java
+    )
+    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
         .padding(10.dp),
@@ -47,15 +52,15 @@ fun NewLightCardBySliderPosition() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(sliderPosition>0.1){
+                if(state.giatridenSlider>0.1){
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
                 }else{
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(start = 5.dp)) {
-                    Text(text = sliderPosition.toString())
-                    Slider(value = sliderPosition, onValueChange ={sliderPosition=it})
+                    Text(text = state.giatridenSlider.toString())
+                    Slider(value = state.giatridenSlider, onValueChange ={viewModel::onChangeValueDenSlider})
                 }
             }
         }
@@ -64,9 +69,13 @@ fun NewLightCardBySliderPosition() {
 
 @Composable
 fun NewLightCardByButton() {
-    var checked by remember {
+    var valuechecked by remember {
         mutableStateOf(false)
     }
+    var viewModel:RoomViewModel = viewModel(
+        modelClass = RoomViewModel::class.java
+    )
+    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
         .padding(10.dp),
@@ -80,17 +89,17 @@ fun NewLightCardByButton() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(checked){
+                if(valuechecked){
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
                 }else{
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
-                    checked = checked,
-                    onCheckedChange = {checked=it},
+                    checked = state.giatriden,
+                    onCheckedChange = {viewModel::onChangeValueDen},
                     thumbContent = {
-                        if(checked){
+                        if(state.giatriden){
                             Icon(painter = painterResource(id = R.drawable.light),
                                 contentDescription = "",
                                 tint = Color.Yellow)

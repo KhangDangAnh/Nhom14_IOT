@@ -35,19 +35,19 @@ fun RoomList(navController: NavHostController) {
     )
     {
         item {
-            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.LivingRoom.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.BedRoom1.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.BedRoom2.route)})
         }
         item {
-            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.KitchenRoom.route)})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Toilet.route)})
         }
         item {
             androidx.compose.material3.Card(

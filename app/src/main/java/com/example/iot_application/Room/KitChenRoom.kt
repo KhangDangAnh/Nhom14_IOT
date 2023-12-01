@@ -37,7 +37,7 @@ public fun KitChenRoom(navController: NavHostController) {
                 title = {
                     Text(text = "KitChen Room",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
                 },
-                navigationIcon = { IconButton(onClick = { },Modifier.size(20.dp)) {
+                navigationIcon = { IconButton(onClick = {navController.popBackStack() },Modifier.size(20.dp)) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
                 }}
             )

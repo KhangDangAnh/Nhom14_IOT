@@ -33,17 +33,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
+import com.example.iot_application.Room.RoomViewModel
 
 @Composable
-fun FanCard() {
-    var checked by remember {
+fun NewFanCard() {
+    var valuechecked by remember {
         mutableStateOf(false)
     }
+    var viewModel: RoomViewModel = viewModel(
+        modelClass = RoomViewModel::class.java
+    )
+    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
         .padding(top = 5.dp, bottom = 5.dp)) {
@@ -56,7 +62,7 @@ fun FanCard() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(checked){
+                if(valuechecked){
                     GifImage()
                 }else{
                     Icon(painter = painterResource(id = R.drawable.fanvip1), contentDescription = "", Modifier.clip(
@@ -64,10 +70,10 @@ fun FanCard() {
                 }
                 Text(text = "Fan", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
-                    checked = checked,
-                    onCheckedChange = {checked=it},
+                    checked = state.giatriquat,
+                    onCheckedChange = {viewModel::onChangeValueQuat},
                     thumbContent = {
-                        if(checked){
+                        if(state.giatriquat){
                             Icon(painter = painterResource(id = R.drawable.fan),
                                 contentDescription = "",
                                 tint = Color.Yellow)

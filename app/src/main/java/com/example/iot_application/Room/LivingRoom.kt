@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.example.iot_application.NewFanCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +39,7 @@ public fun LivingRoom(navController: NavHostController) {
                 title = {
                     Text(text = "Living Room",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
                 },
-                navigationIcon = { IconButton(onClick = { },Modifier.size(20.dp)) {
+                navigationIcon = { IconButton(onClick = {navController.popBackStack() },Modifier.size(20.dp)) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
                 }}
             )
@@ -48,7 +49,6 @@ public fun LivingRoom(navController: NavHostController) {
             .padding(it)
             .fillMaxSize(),
         ) {
-            NewFanCard()
             NewLightCardByButton()
         }
     }
