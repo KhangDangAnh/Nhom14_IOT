@@ -90,7 +90,7 @@ fun HomeScreen(navController: NavHostController) {
                 .fillMaxSize()
         )
         {
-            TabContent()
+            Tabs_Contents(navController)
         }
     }
 }
