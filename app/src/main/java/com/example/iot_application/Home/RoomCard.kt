@@ -26,13 +26,13 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomCard(room_name: String, icon: Int) {
+fun RoomCard(room_name: String, icon: Int,onClick:() -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
         border = BorderStroke(1.dp, Color.LightGray),
-//        onClick = onRoom
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),

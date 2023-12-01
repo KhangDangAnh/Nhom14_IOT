@@ -22,12 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomScreen(navController: NavHostController,/*isFan:Boolean,isLightBySlider:Boolean,isLightbyButton:Boolean*/) {
+fun RoomScreen(navController: NavController,/*isFan:Boolean,isLightBySlider:Boolean,isLightbyButton:Boolean*/) {
     Scaffold(
         topBar = {
             TopAppBar(
