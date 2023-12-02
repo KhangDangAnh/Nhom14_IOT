@@ -1,12 +1,17 @@
 package com.example.iot_application.Profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -21,6 +26,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -32,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.iot_application.R
 import com.example.iot_application.Screens
@@ -39,6 +46,10 @@ import com.example.iot_application.Screens
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile_Screen(navController: NavHostController) {
+    var viewModel: AccountViewModel = viewModel(
+        modelClass = AccountViewModel::class.java
+    )
+    var state = viewModel.state
     Scaffold(bottomBar = {
         BottomAppBar(
             Modifier.clip(
@@ -106,6 +117,11 @@ fun Profile_Screen(navController: NavHostController) {
                         )
 
                     }
+                },
+                actions = {
+                    TextButton(onClick = {navController.navigate(Screens.ChangeProfile.route)}) {
+                        Text(text = "Sửa")
+                    }
                 }
             )
         }
@@ -117,6 +133,20 @@ fun Profile_Screen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(color = Color.LightGray),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = state.hoTen[0].uppercase(),
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.padding(10.dp).fillMaxWidth())
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -137,12 +167,12 @@ fun Profile_Screen(navController: NavHostController) {
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Tên",
+                            text = "Họ tên",
                             textAlign = TextAlign.Start
                         )
                         Row {
                             Text(
-                                text = "name",
+                                text = state.hoTen,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -178,7 +208,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = "name",
+                                text = state.ngaySinh,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -215,7 +245,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = "name",
+                                text = state.gioiTinh,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -252,7 +282,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = "name",
+                                text = state.sdt,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -289,7 +319,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = "name",
+                                text = state.email,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -308,12 +338,12 @@ fun Profile_Screen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {navController.navigate(Screens.Login.route)},
                 ) {
                     Text(text = "Đăng xuất")
                 }
                 Button(
-                    onClick = {},
+                    onClick = {navController.navigate(Screens.ChangePassword.route)},
                 ) {
                     Text(text = "Đổi mật khẩu")
                 }

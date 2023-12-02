@@ -1,33 +1,99 @@
 {
   "project_info": {
-    "project_number": "398546314248",
-    "project_id": "yourhouseismy",
-    "storage_bucket": "yourhouseismy.appspot.com"
+    "project_number": "421714085916",
+    "project_id": "smarthomeapp-8f9ca",
+    "storage_bucket": "smarthomeapp-8f9ca.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:398546314248:android:a72e1a67657e584eba5dbd",
+        "mobilesdk_app_id": "1:421714085916:android:41ff61ecc28c6186ef37d9",
         "android_client_info": {
-          "package_name": "com.example.iot_application"
+          "package_name": "com.example.do_an_ltn"
         }
       },
       "oauth_client": [
         {
-          "client_id": "398546314248-9eiuu5k7947m0oharr18emlueoai1v3j.apps.googleusercontent.com",
+          "client_id": "421714085916-77s48gji0hvvocudpf4t2f9i2privd5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.do_an_ltn",
+            "certificate_hash": "1a7cba6c88685d05816ea3dd8262bcccea374b42"
+          }
+        },
+        {
+          "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDEmLuaNKOKH8Xi9PaTMdknGKRRtE5tEYE"
+          "current_key": "AIzaSyDnViViBTM6RkBPLWOQo1NphD3_V92xoCs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "398546314248-9eiuu5k7947m0oharr18emlueoai1v3j.apps.googleusercontent.com",
+              "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421714085916:android:89b6067190714ba6ef37d9",
+        "android_client_info": {
+          "package_name": "com.example.iot_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnViViBTM6RkBPLWOQo1NphD3_V92xoCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421714085916:android:f1125a9d7ce03035ef37d9",
+        "android_client_info": {
+          "package_name": "com.example.kt_0306211251"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnViViBTM6RkBPLWOQo1NphD3_V92xoCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421714085916-jheqn0f67fcrual8u4siivo8a5b1nc2k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
