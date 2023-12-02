@@ -39,17 +39,24 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
+import com.example.iot_application.Room.Room
 import com.example.iot_application.Room.RoomViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 @Composable
 fun NewFanCard() {
-    var valuechecked by remember {
+    var room:Room
+    val database = Firebase.database
+    val vachecked  = database.getReference("Che do: ")
+    var check by remember {
         mutableStateOf(false)
     }
     var viewModel: RoomViewModel = viewModel(
         modelClass = RoomViewModel::class.java
     )
     var state = viewModel.state
+    val context = LocalContext.current
     Card(modifier = Modifier
         .height(150.dp)
         .padding(top = 5.dp, bottom = 5.dp)) {
@@ -62,7 +69,7 @@ fun NewFanCard() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(valuechecked){
+                if(check){
                     GifImage()
                 }else{
                     Icon(painter = painterResource(id = R.drawable.fanvip1), contentDescription = "", Modifier.clip(
@@ -70,10 +77,17 @@ fun NewFanCard() {
                 }
                 Text(text = "Fan", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
-                    checked = state.giatriquat,
-                    onCheckedChange = {viewModel::onChangeValueQuat},
+                    checked = check,
+                    onCheckedChange = {
+                                        check=it
+                                        if (check){
+                                            vachecked.setValue(1)
+                                        }else{
+                                            vachecked.setValue(0)
+                                        }
+                                      },
                     thumbContent = {
-                        if(state.giatriquat){
+                        if(check){
                             Icon(painter = painterResource(id = R.drawable.fan),
                                 contentDescription = "",
                                 tint = Color.Yellow)
@@ -92,8 +106,8 @@ fun NewFanCard() {
 fun GifImage(
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
-    val imageLoader = ImageLoader.Builder(context)
+    var context = LocalContext.current
+    var imageLoader = ImageLoader.Builder(context)
         .components {
             if (SDK_INT >= 28) {
                 add(ImageDecoderDecoder.Factory())

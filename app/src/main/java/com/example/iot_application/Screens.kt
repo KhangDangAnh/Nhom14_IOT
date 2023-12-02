@@ -9,11 +9,11 @@ import com.example.iot_application.Home.HomeScreen
 import com.example.iot_application.Home.RoomList
 import com.example.iot_application.Login.LoginScreen
 import com.example.iot_application.Profile.Profile_Screen
+import com.example.iot_application.Room.BathRoom
 import com.example.iot_application.Room.BedRoom1
 import com.example.iot_application.Room.BedRoom2
 import com.example.iot_application.Room.KitChenRoom
 import com.example.iot_application.Room.LivingRoom
-import com.example.iot_application.Room.Toilet
 
 sealed class Screens(val route: String) {
     object Login : Screens("Login_Screen")
@@ -28,7 +28,7 @@ sealed class Screens(val route: String) {
     object KitchenRoom : Screens("KitchenRoom_Screen")
     object BedRoom1 : Screens("BedRoom1_Screen")
     object BedRoom2 : Screens("BedRoom2_Screen")
-    object Toilet : Screens("Toilet_Screen")
+    object BathRoom : Screens("Toilet_Screen")
 
 }
 
@@ -85,8 +85,8 @@ fun NavGraph(navController: NavHostController) {
         composable(Screens.BedRoom2.route){
             BedRoom2(navController)
         }
-        composable(Screens.Toilet.route){
-            Toilet(navController)
+        composable(Screens.BathRoom.route){
+            BathRoom(navController)
         }
     }
 }

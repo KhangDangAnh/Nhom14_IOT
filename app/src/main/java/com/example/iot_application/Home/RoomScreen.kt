@@ -47,7 +47,7 @@ fun RoomList(navController: NavHostController) {
             RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.KitchenRoom.route)})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Toilet.route)})
+            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.BathRoom.route)})
         }
         item {
             androidx.compose.material3.Card(
