@@ -23,16 +23,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.iot_application.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomCard(room_name: String, icon: Int,onClick:() -> Unit) {
+fun RoomCard(room_name: String, icon: Int,onClick:()-> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
         border = BorderStroke(1.dp, Color.LightGray),
-        onClick = onClick
+       onClick = onClick
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
