@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398546314248",
+    "project_id": "yourhouseismy",
+    "storage_bucket": "yourhouseismy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398546314248:android:a72e1a67657e584eba5dbd",
+        "android_client_info": {
+          "package_name": "com.example.iot_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398546314248-9eiuu5k7947m0oharr18emlueoai1v3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEmLuaNKOKH8Xi9PaTMdknGKRRtE5tEYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398546314248-9eiuu5k7947m0oharr18emlueoai1v3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
