@@ -4,16 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.chartiot.ChartScreen
+//import com.example.chartiot.ChartScreen
 import com.example.iot_application.Home.DeviceScreen
 import com.example.iot_application.Home.HomeScreen
 import com.example.iot_application.Home.RoomList
 import com.example.iot_application.Login.LoginScreen
+import com.example.iot_application.Login.RegisterScreen
 import com.example.iot_application.Profile.ChangePassword
 import com.example.iot_application.Profile.ChangePassword_Screen
 import com.example.iot_application.Profile.ChangeProfile
 import com.example.iot_application.Profile.Profile_Screen
-import com.example.iot_application.Room.RoomScreen
+//import com.example.iot_application.Room.RoomScreen
 
 sealed class Screens(val route: String) {
     object Login : Screens("Login_Screen")
@@ -25,15 +26,20 @@ sealed class Screens(val route: String) {
     object ChangePassword : Screens("Change_Password_Screen")
     object Room_list : Screens("RoomList_Screen")
     object Devices : Screens("Devices_Screen")
+    object Register:Screens("Register_Screen")
 }
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screens.Profile.route)
+    NavHost(navController = navController, startDestination = Screens.Login.route)
     {
         composable(Screens.Login.route)
         {
             LoginScreen(navController)
+        }
+        composable(Screens.Register.route)
+        {
+            RegisterScreen(navController)
         }
         composable(Screens.Profile.route)
         {
@@ -49,7 +55,7 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(Screens.Room.route)
         {
-            RoomScreen(navController)
+           // RoomScreen(navController)
         }
         composable(Screens.ChangeProfile.route)
         {

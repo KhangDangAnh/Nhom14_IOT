@@ -136,7 +136,7 @@ fun RegisterScreen(
                     )
                     OutlinedTextField(
                         value = state.password,
-                        onValueChange = viewModel::onChangePasword,
+                        onValueChange = viewModel::onChangePassword,
                         keyboardOptions =   KeyboardOptions(
                             keyboardType = KeyboardType.Password
                         ),

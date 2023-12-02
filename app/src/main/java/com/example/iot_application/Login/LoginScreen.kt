@@ -112,7 +112,7 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.padding(5.dp))
                     OutlinedTextField(
                         value = state.password,
-                        onValueChange = viewModel::onChangePasword,
+                        onValueChange = viewModel::onChangePassword,
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password
                         ),

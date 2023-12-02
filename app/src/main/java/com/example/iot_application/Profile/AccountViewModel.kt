@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.EmailAuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AccountViewModel : ViewModel(){
     var state by mutableStateOf(User())
@@ -29,11 +31,37 @@ class AccountViewModel : ViewModel(){
     fun onChangePassword(newvalue: String){
         state = state.copy(password = newvalue)
     }
+    fun addUser() {
+        FirebaseAuth.getInstance()
+            .createUserWithEmailAndPassword(state.email, state.password)
+            .addOnCompleteListener {
+                if (!it.isSuccessful) {
+                    state = state.copy(success = false)
+                } else {
+                    val user = User(
+                        state.hoTen,
+                        state.sdt,
+                        state.email,
+                        state.password
+                    )
+                    Firebase.firestore.collection("users").add(user)
+                    state = state.copy(success = true)
+                }
+            }
+    }
+
+    fun SignIn() {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(state.email, state.password)
+            .addOnCompleteListener {
+                state = state.copy(success = it.isSuccessful)
+            }
+    }
 }
-fun ChangePassword(currentPassword: String, newPassword: String, confirmPassword: String){
+    fun ChangePassword(currentPassword: String, newPassword: String, confirmPassword: String){
     if(newPassword != confirmPassword){
 
     }
+
 
     val user = FirebaseAuth.getInstance().currentUser
     val credential = EmailAuthProvider.getCredential(user?.email!!, currentPassword)
