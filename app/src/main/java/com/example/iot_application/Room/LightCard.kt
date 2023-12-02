@@ -1,5 +1,6 @@
 package com.example.iot_application.Room
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,16 +26,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.iot_application.R
 
 @Composable
-fun LightCardBySliderPosition() {
-    var sliderPosition by remember {
+fun NewLightCardBySliderPosition() {
+    var valueSlider by remember {
         mutableStateOf(0f)
     }
+    var viewModel:RoomViewModel = viewModel(
+        modelClass = RoomViewModel::class.java
+    )
+    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
-        .padding(top = 5.dp, bottom = 5.dp)) {
+        .padding(10.dp),
+        border = BorderStroke(1.dp,Color.Gray)
+    ) {
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally)
@@ -44,15 +52,15 @@ fun LightCardBySliderPosition() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(sliderPosition>0.1){
+                if(state.giatridenSlider>0.1){
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
                 }else{
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(start = 5.dp)) {
-                    Text(text = sliderPosition.toString())
-                    Slider(value = sliderPosition, onValueChange ={sliderPosition=it})
+                    Text(text = state.giatridenSlider.toString())
+                    Slider(value = state.giatridenSlider, onValueChange ={viewModel::onChangeValueDenSlider})
                 }
             }
         }
@@ -60,13 +68,18 @@ fun LightCardBySliderPosition() {
 }
 
 @Composable
-fun LightCardByButton() {
-    var checked by remember {
+fun NewLightCardByButton() {
+    var valuechecked by remember {
         mutableStateOf(false)
     }
+    var viewModel:RoomViewModel = viewModel(
+        modelClass = RoomViewModel::class.java
+    )
+    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
-        .padding(top = 5.dp, bottom = 5.dp)) {
+        .padding(10.dp),
+        border = BorderStroke(1.dp,Color.Gray)) {
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally)
@@ -76,17 +89,17 @@ fun LightCardByButton() {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(checked){
+                if(valuechecked){
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
                 }else{
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
-                    checked = checked,
-                    onCheckedChange = {checked=it},
+                    checked = state.giatriden,
+                    onCheckedChange = {viewModel::onChangeValueDen},
                     thumbContent = {
-                        if(checked){
+                        if(state.giatriden){
                             Icon(painter = painterResource(id = R.drawable.light),
                                 contentDescription = "",
                                 tint = Color.Yellow)
