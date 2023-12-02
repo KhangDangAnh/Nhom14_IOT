@@ -29,19 +29,19 @@ fun LightScreen() {
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ){
             item{
-                LightCard(RoomName = "Living Room")
+                LightCard(RoomName = "Living Room","LED_Khach")
             }
             item{
-                LightCard(RoomName = "Bed Room 1")
+                LightCard(RoomName = "Bed Room 1","LED_Ngu1")
             }
             item{
-                LightCard(RoomName = "Bed Room 2")
+                LightCard(RoomName = "Bed Room 2","LED_Ngu2")
             }
             item{
-                LightCard(RoomName = "Kitchen")
+                LightCard(RoomName = "Kitchen","LED_Bep")
             }
             item{
-                LightCard(RoomName = "Bath Room")
+                LightCard(RoomName = "Bath Room","LED_Wc")
             }
         }
     }
