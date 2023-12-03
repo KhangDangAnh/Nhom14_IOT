@@ -12,13 +12,21 @@ import com.example.iot_application.Login.LoginScreen
 import com.example.iot_application.Profile.ChangePassword
 import com.example.iot_application.Profile.Profile_Screen
 import com.example.iot_application.Profile.changeProfile
-import com.example.iot_application.Room.RoomScreen
+import com.example.iot_application.Room.BedRoom1
+import com.example.iot_application.Room.BedRoom2
+import com.example.iot_application.Room.KitChenRoom
+import com.example.iot_application.Room.LivingRoom
+import com.example.iot_application.Room.Toilet
 
 sealed class Screens(val route: String) {
     object Login : Screens("Login_Screen")
     object Home : Screens("Home_Screen")
     object Profile : Screens("Profile_Screen")
-    object Room : Screens("Room_Screen")
+    object RoomKhach : Screens("RoomKhach_Screen")
+    object RoomNgu1 : Screens("RoomNgu1_Screen")
+    object RoomNgu2 : Screens("RoomNgu2_Screen")
+    object RoomTam : Screens("RoomTam_Screen")
+    object RoomBep : Screens("RoomBep_Screen")
     object Chart : Screens("Chart_Screen")
 
     object Room_list : Screens("RoomList_Screen")
@@ -45,9 +53,25 @@ fun NavGraph(navController: NavHostController) {
         {
             HomeScreen(navController)
         }
-        composable(Screens.Room.route)
+        composable(Screens.RoomKhach.route)
         {
-            RoomScreen(navController)
+            LivingRoom(navController)
+        }
+        composable(Screens.RoomNgu1.route)
+        {
+            BedRoom1(navController)
+        }
+        composable(Screens.RoomNgu2.route)
+        {
+            BedRoom2(navController)
+        }
+        composable(Screens.RoomBep.route)
+        {
+            KitChenRoom(navController)
+        }
+        composable(Screens.RoomTam.route)
+        {
+            Toilet(navController)
         }
         composable(Screens.Room_list.route)
         {

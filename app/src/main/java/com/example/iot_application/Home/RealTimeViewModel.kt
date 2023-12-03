@@ -22,8 +22,8 @@ class RealTimeViewModel : ViewModel() {
         database = FirebaseDatabase.getInstance().getReference("Led")
         database.child(led).setValue(value)
     }
-    fun setValueTemp(value: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Temp")
-        database.child("temp").setValue(value)
+    fun setValueFan(value: Int) {
+        database = FirebaseDatabase.getInstance().getReference("Fan")
+        database.child("fan").setValue(value)
     }
 }

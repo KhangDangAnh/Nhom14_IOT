@@ -1,7 +1,8 @@
-package com.example.iot_application.Room
+package com.example.iot_application
 
 
 import android.os.Build.VERSION.SDK_INT
+import android.util.Size
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,56 +33,100 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
-import com.example.iot_application.R
+import com.example.iot_application.Home.RealTimeViewModel
+import com.example.iot_application.Room.RoomViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 @Composable
-fun FanCard() {
-    var checked by remember {
-        mutableStateOf(false)
+fun NewFanCard() {
+    var viewModel: RealTimeViewModel = viewModel(
+        modelClass = RealTimeViewModel::class.java
+    )
+    var avc by remember { mutableStateOf(0) }
+    val database = FirebaseDatabase.getInstance().getReference("Fan")
+    val ledBepRef = database.child("fan")
+    var checked by remember { mutableStateOf(false) }
+    if (avc == 180) {
+        checked = true
+    } else if (avc == 90) {
+        checked = false
     }
-    Card(modifier = Modifier
-        .height(150.dp)
-        .padding(top = 5.dp, bottom = 5.dp)) {
-        Column(modifier = Modifier.fillMaxSize(),
+    ledBepRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val ledBepValue = dataSnapshot.getValue(Int::class.java)
+            avc = ledBepValue.toString().toInt()
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+        }
+    })
+    Card(
+        modifier = Modifier
+            .height(150.dp)
+            .padding(top = 5.dp, bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally)
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
-            ){
-                if(checked){
+            ) {
+                if (checked) {
                     GifImage()
-                }else{
-                    Icon(painter = painterResource(id = R.drawable.fanvip1), contentDescription = "", Modifier.clip(
-                        CircleShape).size(120.dp))
+                } else {
+                    Icon(
+                        painter = painterResource(id = R.drawable.fanvip1),
+                        contentDescription = "",
+                        Modifier
+                            .clip(
+                                CircleShape
+                            )
+                            .size(120.dp)
+                    )
                 }
                 Text(text = "Fan", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
                     checked = checked,
-                    onCheckedChange = {checked=it},
+                    onCheckedChange = { checked = it },
                     thumbContent = {
-                        if(checked){
-                            Icon(painter = painterResource(id = R.drawable.fan),
+                        if (checked) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.sharp_wind_power_24),
                                 contentDescription = "",
-                                tint = Color.Yellow)
-                        }
-                        else{
-                            Icon(painter = painterResource(id = R.drawable.fan),
+                                tint = Color.Cyan
+                            )
+                            viewModel.setValueFan(180)
+                        } else {
+                            Icon(
+                                painter = painterResource(id = R.drawable.sharp_wind_power_24),
                                 contentDescription = "",
-                                tint = Color.Gray)
+                                tint = Color.Gray
+                            )
+                            if (checked == false && avc > 90) {
+                                viewModel.setValueFan(90)
+                            }
                         }
-                    })
+                    }
+                )
             }
         }
     }
 }
+
 @Composable
 fun GifImage(
     modifier: Modifier = Modifier,
@@ -94,12 +141,12 @@ fun GifImage(
             }
         }
         .build()
-        Image(
-            painter = rememberAsyncImagePainter(
-                ImageRequest.Builder(context).data(data = R.drawable.fanvip).apply(block = {
-                }).build(), imageLoader = imageLoader
-            ),
-            contentDescription = null,
-            modifier = modifier.clip(CircleShape),
-        )
+    Image(
+        painter = rememberAsyncImagePainter(
+            ImageRequest.Builder(context).data(data = R.drawable.fanvip).apply(block = {
+            }).build(), imageLoader = imageLoader
+        ),
+        contentDescription = null,
+        modifier = modifier.clip(CircleShape),
+    )
 }
