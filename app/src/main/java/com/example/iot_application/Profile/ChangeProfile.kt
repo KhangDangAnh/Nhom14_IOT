@@ -36,12 +36,6 @@ import androidx.navigation.NavHostController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangeProfile(navController: NavHostController){
-    var change_hoTen by remember { mutableStateOf(" ") }
-    var change_ngaySinh by remember {mutableStateOf(" ")}
-    var change_gioiTinh by remember {mutableStateOf(" ")}
-    var change_sdt by remember {mutableStateOf(" ")}
-    var change_email by remember {mutableStateOf(" ")}
-
     var viewModel: AccountViewModel = viewModel(
         modelClass = AccountViewModel::class.java
     )
@@ -91,28 +85,8 @@ fun ChangeProfile(navController: NavHostController){
                         .fillMaxWidth()
                         .padding(start = 15.dp, end = 15.dp),
                     value = state.hoTen,
-                    onValueChange = {change_hoTen = it},
+                    onValueChange = viewModel::onChangeHoTen,
                     placeholder = { Text(text = "Họ và tên")}
-                )
-            }
-            Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, end = 15.dp),
-                    value = state.ngaySinh,
-                    onValueChange = {change_ngaySinh = it },
-                    placeholder = { Text(text = "Ngày sinh")}
-                )
-            }
-            Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, end = 15.dp),
-                    value = "",
-                    onValueChange = {},
-                    placeholder = { Text(text = "Giới tính")}
                 )
             }
             Row {
@@ -126,18 +100,10 @@ fun ChangeProfile(navController: NavHostController){
                 )
             }
             Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, end = 15.dp),
-                    value = state.email,
-                    onValueChange = viewModel::onChangeEmail,
-                    placeholder = { Text(text = "Email")}
-                )
-            }
-            Row {
                 Button(
-                    onClick = { /*Lưu tất cả thông tin đã thay đổi trong TextField*/}
+                    onClick = {
+
+                    }
                 ) {
                     Text(text = "Lưu")
                 }

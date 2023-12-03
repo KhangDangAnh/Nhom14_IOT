@@ -42,14 +42,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.iot_application.R
 import com.example.iot_application.Screens
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile_Screen(navController: NavHostController) {
-    var viewModel: AccountViewModel = viewModel(
-        modelClass = AccountViewModel::class.java
-    )
-    var state = viewModel.state
+fun Profile_Screen(navController: NavHostController, dataViewModel: DataViewModel = viewModel()) {
+    val getData = dataViewModel.state.value
     Scaffold(bottomBar = {
         BottomAppBar(
             Modifier.clip(
@@ -109,7 +108,7 @@ fun Profile_Screen(navController: NavHostController) {
 
                 ),
                 navigationIcon = {
-                    androidx.compose.material3.IconButton(onClick = {navController.popBackStack()}) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -119,13 +118,14 @@ fun Profile_Screen(navController: NavHostController) {
                     }
                 },
                 actions = {
-                    TextButton(onClick = {navController.navigate(Screens.ChangeProfile.route)}) {
+                    TextButton(onClick = { navController.navigate(Screens.ChangeProfile.route) }) {
                         Text(text = "Sửa")
                     }
                 }
             )
         }
-        ){
+    ) {
+
         Column(
             Modifier
                 .fillMaxSize()
@@ -133,20 +133,11 @@ fun Profile_Screen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Box(
+            Spacer(
                 modifier = Modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-                    .background(color = Color.LightGray),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = state.hoTen[0].uppercase(),
-                    fontWeight = FontWeight.ExtraBold,
-                    color = Color.White
-                )
-            }
-            Spacer(modifier = Modifier.padding(10.dp).fillMaxWidth())
+                    .padding(10.dp)
+                    .fillMaxWidth()
+            )
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -172,7 +163,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = state.hoTen,
+                                text = getData.hoTen,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -181,80 +172,6 @@ fun Profile_Screen(navController: NavHostController) {
                             )
                         }
                     }
-                }
-            }
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-            ) {
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "Ngày sinh",
-                            textAlign = TextAlign.Start
-                        )
-                        Row {
-                            Text(
-                                text = state.ngaySinh,
-                                textAlign = TextAlign.Start
-                            )
-                            Icon(
-                                imageVector = Icons.Rounded.KeyboardArrowRight,
-                                contentDescription = null
-                            )
-                        }
-                    }
-
-                }
-            }
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-            ) {
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "Giới tính",
-                            textAlign = TextAlign.Start
-                        )
-                        Row {
-                            Text(
-                                text = state.gioiTinh,
-                                textAlign = TextAlign.Start
-                            )
-                            Icon(
-                                imageVector = Icons.Rounded.KeyboardArrowRight,
-                                contentDescription = null
-                            )
-                        }
-                    }
-
                 }
             }
             Card(
@@ -282,7 +199,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = state.sdt,
+                                text = getData.sdt,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -319,7 +236,7 @@ fun Profile_Screen(navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = state.email,
+                                text = getData.email,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -338,12 +255,12 @@ fun Profile_Screen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {navController.navigate(Screens.Login.route)},
+                    onClick = { navController.navigate(Screens.Login.route) },
                 ) {
                     Text(text = "Đăng xuất")
                 }
                 Button(
-                    onClick = {navController.navigate(Screens.ChangePassword.route)},
+                    onClick = { navController.navigate(Screens.ChangePassword.route) },
                 ) {
                     Text(text = "Đổi mật khẩu")
                 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.tasks.await
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,9 +45,11 @@ fun ChangePassword_Screen(navController: NavHostController){
     )
     var state = viewModel.state
 
-    var current_password by remember { mutableStateOf(" ") }
-    var new_password by remember { mutableStateOf(" ") }
-    var confirm_password by remember { mutableStateOf(" ") }
+    var newPassword by remember { mutableStateOf(" ") }
+    var confirmPassword by remember { mutableStateOf("") }
+
+
+
 
     Scaffold(
         topBar = {
@@ -83,23 +90,23 @@ fun ChangePassword_Screen(navController: NavHostController){
             Spacer(modifier = Modifier
                 .padding(10.dp)
                 .fillMaxWidth())
+//            Row {
+//                OutlinedTextField(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(start = 15.dp, end = 15.dp),
+//                    value = current_password,
+//                    onValueChange = {current_password = it},
+//                    label = { Text(text = "Mật khẩu cũ") }
+//                )
+//            }
             Row {
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 15.dp, end = 15.dp),
-                    value = current_password,
-                    onValueChange = {current_password = it},
-                    label = { Text(text = "Mật khẩu cũ") }
-                )
-            }
-            Row {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, end = 15.dp),
-                    value = new_password,
-                    onValueChange = { new_password = it },
+                    value = newPassword,
+                    onValueChange = { newPassword = it },
                     label = { Text(text = "Mật khẩu mới") }
                 )
             }
@@ -108,14 +115,16 @@ fun ChangePassword_Screen(navController: NavHostController){
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 15.dp, end = 15.dp),
-                    value = confirm_password,
-                    onValueChange = { confirm_password = it },
+                    value = confirmPassword,
+                    onValueChange = { confirmPassword = it },
                     label = { Text(text = "Xác thực mật khẩu mới") }
                 )
             }
             Row {
                 Button(
-                    onClick = { ChangePassword(current_password,new_password,confirm_password) },
+                    onClick = {
+
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
@@ -123,6 +132,9 @@ fun ChangePassword_Screen(navController: NavHostController){
                     Text(text = "Cập nhật")
                 }
             }
+
         }
     }
+
 }
+

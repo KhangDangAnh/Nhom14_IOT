@@ -1,36 +1,45 @@
 package com.example.iot_application.Profile
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.EmailAuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
-class AccountViewModel : ViewModel(){
-    var state by mutableStateOf(User())
+class AccountViewModel : ViewModel() {
+    var state by mutableStateOf(AccountState())
         private set
-    fun onChangeHoTen(newvalue: String) {
-        state = state.copy(hoTen = newvalue)
+
+    fun onChangeHoTen(newHoten: String) {
+        state = state.copy(hoTen = newHoten)
     }
-    fun onChangeNgaySinh(newvalue: String) {
-        state = state.copy(ngaySinh = newvalue)
+
+    fun onChangeSDT(newSDT: String) {
+        state = state.copy(sdt = newSDT)
     }
-    fun onChangeGioiTinh(newvalue: String) {
-        state = state.copy(gioiTinh = newvalue)
+
+    fun onChangeEmail(newEmail: String) {
+        state = state.copy(email = newEmail)
     }
-    fun onChangeSDT(newvalue: String) {
-        state = state.copy(sdt = newvalue)
+
+    fun onChangePassword(newPassword: String) {
+        state = state.copy(password = newPassword)
     }
-    fun onChangeEmail(newvalue: String) {
-        state = state.copy(email = newvalue)
-    }
-    fun onChangePassword(newvalue: String){
-        state = state.copy(password = newvalue)
-    }
+
     fun addUser() {
         FirebaseAuth.getInstance()
             .createUserWithEmailAndPassword(state.email, state.password)
@@ -49,7 +58,6 @@ class AccountViewModel : ViewModel(){
                 }
             }
     }
-
     fun SignIn() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(state.email, state.password)
             .addOnCompleteListener {
@@ -57,37 +65,11 @@ class AccountViewModel : ViewModel(){
             }
     }
 }
-    fun ChangePassword(currentPassword: String, newPassword: String, confirmPassword: String){
-    if(newPassword != confirmPassword){
 
-    }
-
-
-    val user = FirebaseAuth.getInstance().currentUser
-    val credential = EmailAuthProvider.getCredential(user?.email!!, currentPassword)
-
-    user.reauthenticate(credential)
-        .addOnCompleteListener { authTask ->
-            if(authTask.isSuccessful){
-                user.updatePassword(newPassword)
-                    .addOnCompleteListener { updateTask ->
-                        if(updateTask.isSuccessful){
-                            //thong bao thanh cong
-                        } else{
-                            //that bai
-                        }
-                    }
-            } else{
-                //Thoong bao loi xac thuc
-            }
-        }
-}
-data class User(
-    val hoTen: String = "",
-    val ngaySinh: String = "",
-    val gioiTinh: String = "",
-    val sdt: String = "",
-    val email: String = "",
+data class AccountState(
+    var hoTen: String = "",
+    var sdt: String = "",
+    var email: String = "",
     var password: String = "",
-    val success: Boolean = false,
+    var success: Boolean = false,
 )

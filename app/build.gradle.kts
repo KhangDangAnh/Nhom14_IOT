@@ -86,4 +86,6 @@ dependencies {
     implementation ("androidx.compose.runtime:runtime:1.5.4")
     implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
     implementation ("androidx.compose.runtime:runtime-rxjava2:1.5.4")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-alpha02")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.0.5")
 }
