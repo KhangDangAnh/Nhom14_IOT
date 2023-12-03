@@ -39,10 +39,6 @@ fun LightCard(RoomName: String, Led: String) {
     var viewModel: RealTimeViewModel = viewModel(
         modelClass = RealTimeViewModel::class.java
     )
-    val context = LocalContext.current
-    val Store = Store(context)
-
-
     var avc by remember { mutableStateOf(0) }
     val database = FirebaseDatabase.getInstance().getReference("Led")
     val ledBepRef = database.child(Led)

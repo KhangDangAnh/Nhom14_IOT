@@ -13,7 +13,7 @@ sealed class DevicesTabs_item(
     var screen : MyTabsFunction,
     var icon : Int
 ){
-    object Light :DevicesTabs_item("Light",{ LightScreen()}, R.drawable.baseline_lightbulb_24)
-    object Thermostat :DevicesTabs_item("Temperature",{Temperature_Screen()}, R.drawable.baseline_device_thermostat_24)
-    object Fan :DevicesTabs_item("Fan",{ Fan_Screen() }, R.drawable.sharp_wind_power_24)
+    object Light :DevicesTabs_item("Đèn",{ LightScreen()}, R.drawable.baseline_lightbulb_24)
+    object Thermostat :DevicesTabs_item("Nhiệt độ",{Temperature_Screen()}, R.drawable.baseline_device_thermostat_24)
+    object Fan :DevicesTabs_item("Quạt",{ Fan_Screen() }, R.drawable.sharp_wind_power_24)
 }

@@ -35,51 +35,19 @@ fun RoomList(navController: NavHostController) {
     )
     {
         item {
-            RoomCard(room_name = "Living Room", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Phòng Khách", icon = R.drawable.baseline_weekend_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 1", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Phòng Ngủ", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bed Room 2", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Phòng Ngủ", icon = R.drawable.baseline_bed_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Kitchen", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.Room.route)})
+            RoomCard(room_name = "Phòng Bếp", icon = R.drawable.baseline_kitchen_24,{navController.navigate(Screens.Room.route)})
         }
         item {
-            RoomCard(room_name = "Bath Room", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
-        }
-        item {
-            androidx.compose.material3.Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp),
-                border = BorderStroke(1.dp, Color.LightGray),
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        trailingIcon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_lock_open_24),
-                                contentDescription = ""
-                            )
-                        },
-                        label = { Text(text = "Door Password", fontWeight = FontWeight.Bold) }
-                    )
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_key_24),
-                            contentDescription = ""
-                        )
-                    }
-                }
-            }
+            RoomCard(room_name = "Phòng Tắm", icon = R.drawable.baseline_bathtub_24,{navController.navigate(Screens.Room.route)})
         }
     }
 }

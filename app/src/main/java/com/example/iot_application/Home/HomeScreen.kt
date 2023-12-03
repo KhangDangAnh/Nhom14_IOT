@@ -50,13 +50,6 @@ fun HomeScreen(navController: NavHostController) {
                             tint = Color.DarkGray
                         )
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_doorbell_24),
-                            contentDescription = "",
-                            tint = Color.DarkGray
-                        )
-                    }
                     IconButton(onClick = { navController.navigate(Screens.Chart.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_bar_chart_24),

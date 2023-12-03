@@ -22,43 +22,8 @@ class RealTimeViewModel : ViewModel() {
         database = FirebaseDatabase.getInstance().getReference("Led")
         database.child(led).setValue(value)
     }
-
-    fun setValueLedKhach(value: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Led")
-        database.child("LED_Khach").setValue(value)
-    }
-
-    fun setValueLedNgu1(value: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Led")
-        database.child("LED_Ngu1").setValue(value)
-    }
-
-    fun setValueLedNgu2(value: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Led")
-        database.child("LED_Ngu2").setValue(value)
-    }
-
-    fun setValueLedWC(value: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Led")
-        database.child("LED_Wc").setValue(value)
-    }
-
-    fun getLED_BepValue() {
-        val database = FirebaseDatabase.getInstance()
-        val ledBepRef = database.getReference("LED_Bep")
-
-        ledBepRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val ledBepValue = dataSnapshot.getValue(Int::class.java)
-                println("LED_Bep value is $ledBepValue")
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                println("Failed to read value from database")
-            }
-        })
+    fun setValueTemp(value: Int) {
+        database = FirebaseDatabase.getInstance().getReference("Temp")
+        database.child("temp").setValue(value)
     }
 }
-data class Devices(
-    val check : Boolean = false
-)

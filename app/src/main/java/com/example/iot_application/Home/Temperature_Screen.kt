@@ -24,7 +24,7 @@ fun Temperature_Screen()
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             item {
-                TempCard(RoomName = "Living Room", temp = 31f)
+                TempCard(RoomName = "Living Room")
             }
         }
     }
