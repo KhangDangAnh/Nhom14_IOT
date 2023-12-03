@@ -1,12 +1,17 @@
 package com.example.iot_application.Profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -21,6 +26,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -32,13 +38,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.iot_application.R
 import com.example.iot_application.Screens
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile_Screen(name: String,navController: NavHostController) {
+fun Profile_Screen(navController: NavHostController, dataViewModel: DataViewModel = viewModel()) {
+    val getData = dataViewModel.state.value
     Scaffold(bottomBar = {
         BottomAppBar(
             Modifier.clip(
@@ -54,6 +64,13 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                 IconButton(onClick = { navController.navigate(Screens.Home.route) }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_home_24),
+                        contentDescription = "",
+                        tint = Color.DarkGray
+                    )
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_doorbell_24),
                         contentDescription = "",
                         tint = Color.DarkGray
                     )
@@ -91,7 +108,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
 
                 ),
                 navigationIcon = {
-                    androidx.compose.material3.IconButton(onClick = {navController.popBackStack()}) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -99,10 +116,16 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
 
                     }
+                },
+                actions = {
+                    TextButton(onClick = { navController.navigate(Screens.ChangProfile.route) }) {
+                        Text(text = "Sửa")
+                    }
                 }
             )
         }
-        ){
+    ) {
+
         Column(
             Modifier
                 .fillMaxSize()
@@ -110,6 +133,11 @@ fun Profile_Screen(name: String,navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            Spacer(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+            )
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -130,12 +158,12 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Tên",
+                            text = "Họ tên",
                             textAlign = TextAlign.Start
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = getData.hoTen,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -144,80 +172,6 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                             )
                         }
                     }
-                }
-            }
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-            ) {
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "Ngày sinh",
-                            textAlign = TextAlign.Start
-                        )
-                        Row {
-                            Text(
-                                text = name,
-                                textAlign = TextAlign.Start
-                            )
-                            Icon(
-                                imageVector = Icons.Rounded.KeyboardArrowRight,
-                                contentDescription = null
-                            )
-                        }
-                    }
-
-                }
-            }
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-            ) {
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "Giới tính",
-                            textAlign = TextAlign.Start
-                        )
-                        Row {
-                            Text(
-                                text = name,
-                                textAlign = TextAlign.Start
-                            )
-                            Icon(
-                                imageVector = Icons.Rounded.KeyboardArrowRight,
-                                contentDescription = null
-                            )
-                        }
-                    }
-
                 }
             }
             Card(
@@ -245,7 +199,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = getData.sdt,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -282,7 +236,7 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                         )
                         Row {
                             Text(
-                                text = name,
+                                text = getData.email,
                                 textAlign = TextAlign.Start
                             )
                             Icon(
@@ -301,12 +255,12 @@ fun Profile_Screen(name: String,navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {navController.navigate(Screens.Login.route)},
+                    onClick = { navController.navigate(Screens.Login.route) },
                 ) {
                     Text(text = "Đăng xuất")
                 }
                 Button(
-                    onClick = {navController.navigate(Screens.ChangePassword.route)},
+                    onClick = { navController.navigate(Screens.ChangePassword.route) },
                 ) {
                     Text(text = "Đổi mật khẩu")
                 }
