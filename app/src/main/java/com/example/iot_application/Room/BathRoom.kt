@@ -1,6 +1,7 @@
 package com.example.iot_application.Room
 
 
+import android.hardware.lights.Light
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,12 +42,14 @@ import com.google.firebase.database.database
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-public fun KitChenRoom(navController: NavHostController) {
+public fun BathRoom(navController: NavHostController) {
+
     var Led by remember {
         mutableStateOf(false)
     }
     val database = Firebase.database
-    val kitchen = kitchenroom(4,"KITCHENROOM",Led)
+    val BATHROOM = database.reference.child("ROOM")
+    val bath = bathroom(5,"BATHROOM",Led)
 
     val checked = database.getReference("Led")
     Scaffold(
@@ -54,9 +57,9 @@ public fun KitChenRoom(navController: NavHostController) {
             TopAppBar(
                 colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color(12, 27, 50), titleContentColor = Color.White),
                 title = {
-                    Text(text = "KitChen Room",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                    Text(text = "Toilet",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
                 },
-                navigationIcon = { IconButton(onClick = {navController.popBackStack() },Modifier.size(20.dp)) {
+                navigationIcon = { IconButton(onClick = { navController.popBackStack()},Modifier.size(20.dp)) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
                 }}
             )
@@ -114,8 +117,9 @@ public fun KitChenRoom(navController: NavHostController) {
         }
     }
 }
-data class kitchenroom(
+
+data class bathroom(
     val id:Int,
-    val name:String="KITCHENROOM",
+    val name:String="BATHROOM",
     val led:Boolean
 )
