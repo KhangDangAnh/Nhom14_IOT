@@ -27,55 +27,80 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+
+import com.example.iot_application.Home.RealTimeViewModel
+=======
+
 import com.example.iot_application.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 @Composable
 fun NewLightCardBySliderPosition() {
-    var valueSlider by remember {
-        mutableStateOf(0f)
-    }
-    var viewModel:RoomViewModel = viewModel(
-        modelClass = RoomViewModel::class.java
-    )
-    var state = viewModel.state
-    Card(modifier = Modifier
-        .height(150.dp)
-        .padding(10.dp),
-        border = BorderStroke(1.dp,Color.Gray)
-    ) {
-        Column(modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally)
-        {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                if(state.giatridenSlider>0.1){
-                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
-                }else{
-                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
-                }
-                Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(start = 5.dp)) {
-                    Text(text = state.giatridenSlider.toString())
-                    Slider(value = state.giatridenSlider, onValueChange ={viewModel::onChangeValueDenSlider})
-                }
-            }
-        }
-    }
+//    var valueSlider by remember {
+//        mutableStateOf(0f)
+//    }
+//    var viewModel:RoomViewModel = viewModel(
+//        modelClass = RoomViewModel::class.java
+//    )
+//    var state : RealTimeViewModel = viewModel(
+//        modelClass = RealTimeViewModel::class.java
+//    )
+//
+//    Card(modifier = Modifier
+//        .height(150.dp)
+//        .padding(10.dp),
+//        border = BorderStroke(1.dp,Color.Gray)
+//    ) {
+//        Column(modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally)
+//        {
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.SpaceAround,
+//                verticalAlignment = Alignment.CenterVertically
+//            ){
+//                if(state.giatridenSlider>0.1){
+//                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
+//                }else{
+//                    Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
+//                }
+//                Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+//                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(start = 5.dp)) {
+//                    Text(text = state.giatridenSlider.toString())
+//                    Slider(value = state.giatridenSlider, onValueChange ={viewModel::onChangeValueDenSlider})
+//                }
+//            }
+//        }
+//    }
 }
 
 @Composable
-fun NewLightCardByButton() {
-    var valuechecked by remember {
-        mutableStateOf(false)
+fun NewLightCardByButton(Led:String) {
+    var avc by remember { mutableStateOf(0) }
+    val database = FirebaseDatabase.getInstance().getReference("Led")
+    val ledBepRef = database.child(Led)
+    var checked by remember { mutableStateOf(false) }
+    if (avc == 1) {
+        checked = true
+    } else {
+        checked = false
     }
-    var viewModel:RoomViewModel = viewModel(
-        modelClass = RoomViewModel::class.java
+    ledBepRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val ledBepValue = dataSnapshot.getValue(Int::class.java)
+            avc = ledBepValue.toString().toInt()
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+        }
+    })
+    var state : RealTimeViewModel = viewModel(
+        modelClass = RealTimeViewModel::class.java
     )
-    var state = viewModel.state
     Card(modifier = Modifier
         .height(150.dp)
         .padding(10.dp),
@@ -96,18 +121,25 @@ fun NewLightCardByButton() {
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
-                    checked = state.giatriden,
-                    onCheckedChange = {viewModel::onChangeValueDen},
+
+                    checked = checked,
+                    onCheckedChange = {checked = it},
+
                     thumbContent = {
                         if(state.giatriden){
                             Icon(painter = painterResource(id = R.drawable.light),
                                 contentDescription = "",
                                 tint = Color.Yellow)
+                            state.setValueLed(1,Led)
                         }
                         else{
                             Icon(painter = painterResource(id = R.drawable.light),
                                 contentDescription = "",
                                 tint = Color.Gray)
+                            if(checked == false && avc == 1)
+                            {
+                                state.setValueLed(0,Led)
+                            }
                         }
                     })
             }

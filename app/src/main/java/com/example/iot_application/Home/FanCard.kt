@@ -25,12 +25,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.iot_application.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 @Composable
 fun FanCard(RoomName: String) {
+    var viewModel: RealTimeViewModel = viewModel(
+        modelClass = RealTimeViewModel::class.java
+    )
+    var avc by remember { mutableStateOf(0) }
+    val database = FirebaseDatabase.getInstance().getReference("Fan")
+    val ledBepRef = database.child("fan")
     var checked by remember { mutableStateOf(false) }
-    var sliderPosition by remember { mutableFloatStateOf(0f) }
+    if (avc == 180) {
+        checked = true
+    } else if (avc == 90) {
+        checked = false
+    }
+    ledBepRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val ledBepValue = dataSnapshot.getValue(Int::class.java)
+            avc = ledBepValue.toString().toInt()
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+        }
+    })
     Card(modifier = Modifier.height(130.dp)) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -57,6 +81,7 @@ fun FanCard(RoomName: String) {
                                 contentDescription = "",
                                 tint = Color.Cyan
                             )
+                            viewModel.setValueFan(180)
                         } else
                         {
                             Icon(
@@ -64,6 +89,10 @@ fun FanCard(RoomName: String) {
                                 contentDescription = "",
                                 tint = Color.Gray
                             )
+                            if(checked == false && avc > 90)
+                            {
+                                viewModel.setValueFan(90)
+                            }
                         }
                     }
                 )

@@ -26,9 +26,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.iot_application.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 @Composable
-fun TempCard(RoomName: String,temp : Float) {
+fun TempCard(RoomName: String) {
+    var avc by remember { mutableStateOf(0) }
+    val database = FirebaseDatabase.getInstance().getReference("Temp")
+    val TempRef = database.child("temp")
+    TempRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val TempValue = dataSnapshot.getValue(Int::class.java)
+            avc = TempValue.toString().toInt()
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+        }
+    })
     Card(modifier = Modifier.height(130.dp)) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -45,7 +61,7 @@ fun TempCard(RoomName: String,temp : Float) {
                 Text(RoomName, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             }
             Divider()
-            Text("${temp.toString()} °C")
+            Text("${avc.toString()} °C")
         }
     }
 }

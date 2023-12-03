@@ -136,6 +136,8 @@ fun RegisterScreen(
                     )
                     OutlinedTextField(
                         value = state.password,
+                        onValueChange = viewModel::onChangePassword,
+=======
                         onValueChange = viewModel::onChangePasword,
                         keyboardOptions =   KeyboardOptions(
                             keyboardType = KeyboardType.Password
@@ -196,4 +198,8 @@ fun RegisterScreen(
             title = "Yêu cầu nhập đầy đủ",
         )
     }
+
 }
+=======
+}
+

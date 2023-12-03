@@ -27,12 +27,6 @@ fun Fan_Screen()
             item {
                 FanCard(RoomName = "Living Room")
             }
-            item {
-                FanCard(RoomName = "Bed Room 1")
-            }
-            item {
-                FanCard(RoomName = "Bed Room 2")
-            }
         }
     }
 }

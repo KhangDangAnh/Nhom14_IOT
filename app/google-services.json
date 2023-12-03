@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1087204289189",
+    "firebase_url": "https://yourhouse-e912e-default-rtdb.firebaseio.com",
+    "project_id": "yourhouse-e912e",
+    "storage_bucket": "yourhouse-e912e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087204289189:android:43e2dd53f66c184e7dbb4c",
+        "android_client_info": {
+          "package_name": "com.example.iot_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM6r6xt4ghkYkxKor0TIx1UFZ1thjECVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

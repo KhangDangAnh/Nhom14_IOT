@@ -38,13 +38,13 @@ import kotlinx.coroutines.launch
 fun Tabs_Contents(navController: NavHostController) {
     val tabItems = listOf<TabItem>(
         TabItem(
-            title = "Home",
+            title = "Danh Sách Phòng",
             UnSelectIcon = R.drawable.outline_home_24,
             SelectIcon = R.drawable.baseline_home_24,
             Screen = { RoomList(navController) }
         ),
         TabItem(
-            title = "Devices",
+            title = "Thiết bị",
             UnSelectIcon = R.drawable.outline_devices_other_24,
             SelectIcon = R.drawable.baseline_devices_other_24,
             Screen = { DeviceScreen(navController) }
