@@ -38,6 +38,7 @@ public fun BedRoom1(navController: NavHostController) {
                 colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color(12, 27, 50), titleContentColor = Color.White),
                 title = {
                     Text(text = "Phòng Ngủ",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+
                 },
                 navigationIcon = { IconButton(onClick = {navController.popBackStack()},Modifier.size(20.dp)) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
@@ -50,6 +51,7 @@ public fun BedRoom1(navController: NavHostController) {
             .fillMaxSize(),
         ) {
             NewLightCardByButton("LED_Ngu1")
+=======
         }
     }
 }

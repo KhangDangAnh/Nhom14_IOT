@@ -112,7 +112,11 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.padding(5.dp))
                     OutlinedTextField(
                         value = state.password,
+
                         onValueChange = viewModel::onChangePassword,
+=======
+                        onValueChange = viewModel::onChangePasword,
+
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password
                         ),
@@ -185,6 +189,27 @@ fun LoginScreen(
         )
     }
 
+
+=======
+}
+
+@Composable
+fun DialogSample(
+    title: String = "",
+    content: String = "",
+    onDiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDiss,
+        confirmButton = {
+            TextButton(onClick = onConfirm) {
+                Text(text = "Xác Nhận")
+            }
+        },
+        title = { Text(text = title) },
+        text = { Text(text = content) }
+    )
 }
 
 @Composable

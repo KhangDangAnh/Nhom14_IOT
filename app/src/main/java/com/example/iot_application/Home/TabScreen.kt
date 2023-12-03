@@ -81,7 +81,6 @@ fun Tabs_Contents(navController: NavHostController) {
                                 painterResource(id = tabItem.UnSelectIcon)
                             }, contentDescription = ""
                         )
-                        /////
                     }
                 )
             }

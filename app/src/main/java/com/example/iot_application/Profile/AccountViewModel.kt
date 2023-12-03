@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,15 @@ import kotlinx.coroutines.tasks.await
 
 class AccountViewModel : ViewModel() {
     var state by mutableStateOf(AccountState())
+
+import androidx.lifecycle.ViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
+
+class AccountViewModel : ViewModel(){
+    var state by mutableStateOf(User())
+
         private set
 
     fun onChangeHoTen(newHoten: String) {
@@ -36,8 +46,14 @@ class AccountViewModel : ViewModel() {
         state = state.copy(email = newEmail)
     }
 
+
     fun onChangePassword(newPassword: String) {
         state = state.copy(password = newPassword)
+    }
+
+
+    fun onChangePasword(newPassword: String) {
+        state = state.copy(email = newPassword)
     }
 
     fun addUser() {
@@ -58,6 +74,9 @@ class AccountViewModel : ViewModel() {
                 }
             }
     }
+
+
+
     fun SignIn() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(state.email, state.password)
             .addOnCompleteListener {
@@ -72,4 +91,8 @@ data class AccountState(
     var email: String = "",
     var password: String = "",
     var success: Boolean = false,
+=======
+    var password:String="",
+    var success:Boolean= false
+
 )

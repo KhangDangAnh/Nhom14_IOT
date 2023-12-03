@@ -27,7 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import com.example.iot_application.Home.RealTimeViewModel
+=======
+
 import com.example.iot_application.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -111,17 +114,19 @@ fun NewLightCardByButton(Led:String) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                if(checked){
+                if(valuechecked){
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp), tint = Color.Yellow)
                 }else{
                     Icon(painter = painterResource(id = R.drawable.iconlight), contentDescription = "", Modifier.size(120.dp))
                 }
                 Text(text = "Light", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Switch(
+
                     checked = checked,
                     onCheckedChange = {checked = it},
+
                     thumbContent = {
-                        if(checked){
+                        if(state.giatriden){
                             Icon(painter = painterResource(id = R.drawable.light),
                                 contentDescription = "",
                                 tint = Color.Yellow)

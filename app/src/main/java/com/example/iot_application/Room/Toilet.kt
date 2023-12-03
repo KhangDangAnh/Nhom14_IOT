@@ -36,7 +36,9 @@ public fun Toilet(navController: NavHostController) {
             TopAppBar(
                 colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Color(12, 27, 50), titleContentColor = Color.White),
                 title = {
+
                     Text(text = "Phòng Tắm",fontWeight = FontWeight.Bold, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+
                 },
                 navigationIcon = { IconButton(onClick = { },Modifier.size(20.dp)) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)

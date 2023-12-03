@@ -75,7 +75,7 @@ fun NewFanCard() {
             .padding(top = 5.dp, bottom = 5.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         )
@@ -84,8 +84,10 @@ fun NewFanCard() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
+
             ) {
                 if (checked) {
+
                     GifImage()
                 } else {
                     Icon(
@@ -106,6 +108,7 @@ fun NewFanCard() {
                         if (checked) {
                             Icon(
                                 painter = painterResource(id = R.drawable.sharp_wind_power_24),
+
                                 contentDescription = "",
                                 tint = Color.Cyan
                             )
